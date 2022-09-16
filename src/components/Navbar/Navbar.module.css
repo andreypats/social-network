@@ -1,0 +1,17 @@
+.nav {
+    grid-area: n;
+    background-color: darkgrey;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.item {
+    /*стили для ссылок*/
+    color: black;
+    margin-left: 10px;
+}
+
+.active {
+    color: gold;
+    margin-left: 10px;
+}
