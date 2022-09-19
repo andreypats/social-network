@@ -2,7 +2,14 @@ import React from "react";
 import s from './MyPosts.module.css'
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
-export const MyPosts = (props: any) => {
+
+type MyPostsType = {
+    postsElements: any
+    newPostText: string | undefined
+    dispatch: (action: any) => void
+}
+
+export const MyPosts = (props: MyPostsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 

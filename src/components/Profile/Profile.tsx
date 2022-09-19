@@ -3,10 +3,16 @@ import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {Post} from "./MyPosts/Post/Post";
+import {PostType, ProfilePageType} from "../../redux/state";
 
-export const Profile = (props: any) => {
+type ProfileType = {
+    dispatch: (action: any) => void
+    profilePage: ProfilePageType
+}
 
-    let postsElements = props.profilePage.posts.map ((p: any) => <Post message={p.message} likesCount={p.likesCount}/>)
+export const Profile = (props: ProfileType) => {
+
+    let postsElements = props.profilePage.posts.map ((p: PostType) => <Post message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.profile}>

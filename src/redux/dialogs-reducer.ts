@@ -1,14 +1,14 @@
-import {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import {DialogsPageType} from "./state";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-type SendMessageType = ReturnType<typeof sendMessageCreator>
-type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
+export type SendMessageType = ReturnType<typeof sendMessageCreator>
+export type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
 
-type DialogsReducerActionType = SendMessageType | UpdateNewMessageBodyType
+export type DialogsReducerActionType = SendMessageType | UpdateNewMessageBodyType
 
-export const dialogsReducer = (state: any, action: DialogsReducerActionType) => {
+export const dialogsReducer = (state: DialogsPageType, action: DialogsReducerActionType): DialogsPageType => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:

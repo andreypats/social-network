@@ -13,7 +13,7 @@ import {StateType, StoreType} from "./redux/state";
 type AppType = {
     store: StoreType
     state: StateType
-    dispatch: any
+    dispatch: (action: any) => void
 }
 
 const App: React.FC<AppType> = (props) => {

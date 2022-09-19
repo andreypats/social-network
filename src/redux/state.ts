@@ -10,13 +10,13 @@ export type DialogType = {
     name: string
 }
 export type PostType = {
-    id: number
-    message: string
+    id?: number
+    message: string | undefined
     likesCount: number
 }
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: {}
+    newPostText: string | undefined
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>
@@ -85,7 +85,7 @@ export let store: StoreType = {
 
 declare global {
     interface Window {
-        store:any;
+        store: StoreType;
     }
 }
 window.store = store;

@@ -1,12 +1,14 @@
+import {ProfilePageType} from "./state";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-type AddPostType = ReturnType<typeof addPostActionCreator>
-type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
+export type AddPostType = ReturnType<typeof addPostActionCreator>
+export type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
 
-type profileReducerActionType = AddPostType | UpdateNewPostTextType
+export type profileReducerActionType = AddPostType | UpdateNewPostTextType
 
-export const profileReducer = (state: any, action: profileReducerActionType) => {
+export const profileReducer = (state: ProfilePageType, action: profileReducerActionType): ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST:
