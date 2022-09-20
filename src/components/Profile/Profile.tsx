@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {Post} from "./MyPosts/Post/Post";
-import {PostType, ProfilePageType} from "../../redux/state";
+import {PostType, ProfilePageType} from "../../redux/store";
 
 type ProfileType = {
     dispatch: (action: any) => void

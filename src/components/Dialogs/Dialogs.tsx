@@ -1,8 +1,10 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialog.module.css'
 import {NavLink} from "react-router-dom";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
-import {StoreType} from "../../redux/state";
+import {DialogsReducerActionType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+import {DialogsPageType, ProfilePageType, StoreType} from "../../redux/store";
+import {EmptyObject, Store} from "redux";
+import {profileReducerActionType} from "../../redux/profile-reducer";
 
 type DialogsNameType = {
     id: number
@@ -31,7 +33,7 @@ const DialogsMessage = (props: DialogsMessageType) => {
 }
 
 type DialogsType = {
-    store: StoreType
+    store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
 }
 
 export const Dialogs = (props: DialogsType) => {

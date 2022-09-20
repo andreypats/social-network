@@ -8,10 +8,13 @@ import {Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StateType, StoreType} from "./redux/state";
+import {DialogsPageType, ProfilePageType, StateType, StoreType} from "./redux/store";
+import {EmptyObject, Store} from "redux";
+import {profileReducerActionType} from "./redux/profile-reducer";
+import {DialogsReducerActionType} from "./redux/dialogs-reducer";
 
 type AppType = {
-    store: StoreType
+    store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
     state: StateType
     dispatch: (action: any) => void
 }

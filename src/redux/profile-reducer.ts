@@ -1,4 +1,4 @@
-import {ProfilePageType} from "./state";
+import {ProfilePageType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -8,7 +8,17 @@ export type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCre
 
 export type profileReducerActionType = AddPostType | UpdateNewPostTextType
 
-export const profileReducer = (state: ProfilePageType, action: profileReducerActionType): ProfilePageType => {
+let initialState: ProfilePageType = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 15},
+        {id: 2, message: 'It\'s my first post', likesCount: 25},
+        {id: 3, message: 'Hello', likesCount: 5},
+        {id: 4, message: 'My name is...', likesCount: 2},
+    ],
+    newPostText: 'new text'
+}
+
+export const profileReducer = (state = initialState, action: profileReducerActionType): ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST:
@@ -29,4 +39,7 @@ export const profileReducer = (state: ProfilePageType, action: profileReducerAct
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const updateNewPostTextActionCreator = (text: string | undefined) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
+export const updateNewPostTextActionCreator = (text: string | undefined) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+} as const)
