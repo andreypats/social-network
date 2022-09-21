@@ -14,8 +14,7 @@ let rerenderEntireTree = (state: StateType) => {
         <React.StrictMode>
             <BrowserRouter>
                 <App
-                    state={state}
-                    dispatch={store.dispatch.bind(store)}
+
                     store={store}
                     //bind - метод, который указывает, к какому объекту мы привязываемся (store)
                 />

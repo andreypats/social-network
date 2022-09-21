@@ -1,9 +1,7 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
-// import s from './MyPosts,module.css'
 
-
-export const ProfileInfo = (props: any) => {
+export const ProfileInfo = () => {
     return (
         <div className={s.profileInfo}>
             <div>
