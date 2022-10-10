@@ -1,10 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialog.module.css'
 import {NavLink} from "react-router-dom";
-import {DialogsReducerActionType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
-import {DialogsPageType, ProfilePageType} from "../../redux/store";
-import {EmptyObject, Store} from "redux";
-import {profileReducerActionType} from "../../redux/profile-reducer";
 
 type DialogsNameType = {
     id: number
@@ -33,25 +29,30 @@ const DialogsMessage = (props: DialogsMessageType) => {
 }
 
 type DialogsType = {
-    store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
+    updateNewMessageBody: any
+    sendMessage: any
+    dialogsPage: any
 }
 
 export const Dialogs = (props: DialogsType) => {
 
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
+    // let state = props.store.getState().dialogsPage;
 
-    let dialogsElements = state.dialogs.map(d => <DialogsName name={d.name} id={d.id}/>)
-    let MessageElements = state.messages.map(m => <DialogsMessage message={m.message} id={m.id}/>)
+    let dialogsElements = state.dialogs.map((d: any) => <DialogsName name={d.name} id={d.id}/>)
+    let MessageElements = state.messages.map((m: any) => <DialogsMessage message={m.message} id={m.id}/>)
     let newMessageBody = state.newMessageBody;
 
 
     let addMessage = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessage()
+        // props.store.dispatch(sendMessageCreator())
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body)
+        //props.store.dispatch(updateNewMessageBodyCreator(body));
     }
 
     return (

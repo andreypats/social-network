@@ -1,15 +1,22 @@
 import React from "react";
 import s from './Profile.module.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {store} from "../../redux/store";
+import {DialogsPageType, ProfilePageType} from "../../redux/store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {EmptyObject, Store} from "redux";
+import {profileReducerActionType} from "../../redux/profile-reducer";
+import {DialogsReducerActionType} from "../../redux/dialogs-reducer";
 
-export const Profile = () => {
+type ProfileType = {
+    store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
+}
+
+export const Profile = (props: ProfileType) => {
 
     return (
         <div className={s.profile}>
             <ProfileInfo />
-            <MyPostsContainer store={store}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     )
 }

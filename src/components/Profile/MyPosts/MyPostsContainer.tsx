@@ -1,11 +1,17 @@
 import React from "react";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {
+    addPostActionCreator,
+    profileReducerActionType,
+    updateNewPostTextActionCreator
+} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
-import {StoreType} from "../../../redux/store";
+import {DialogsPageType, ProfilePageType} from "../../../redux/store";
+import {EmptyObject, Store} from "redux";
+import {DialogsReducerActionType} from "../../../redux/dialogs-reducer";
 
 
 type MyPostsType = {
-    store: StoreType
+    store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
 }
 
 export const MyPostsContainer = (props: MyPostsType) => {
