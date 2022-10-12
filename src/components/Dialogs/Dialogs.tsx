@@ -39,8 +39,8 @@ export const Dialogs = (props: DialogsType) => {
     let state = props.dialogsPage;
     // let state = props.store.getState().dialogsPage;
 
-    let dialogsElements = state.dialogs.map((d: any) => <DialogsName name={d.name} id={d.id}/>)
-    let MessageElements = state.messages.map((m: any) => <DialogsMessage message={m.message} id={m.id}/>)
+    let dialogsElements = state.dialogs.map((d: any) => <DialogsName name={d.name} key={d.id} id={d.id}/>)
+    let MessageElements = state.messages.map((m: any) => <DialogsMessage message={m.message} key={m.id} id={m.id}/>)
     let newMessageBody = state.newMessageBody;
 
 

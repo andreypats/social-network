@@ -3,7 +3,6 @@ import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialo
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 
-
 // type DialogsContainerType = {
 //     store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
 // }
@@ -31,11 +30,11 @@ let mapStateToProps = (state: any) => {
 
 let mapDispatchToProps = (dispatch: any) => {
     return {
-        updateNewMessageBody: () => {
-            dispatch(sendMessageCreator())
-        },
-        sendMessage: (body: any) => {
+        updateNewMessageBody: (body: any) => {
             dispatch(updateNewMessageBodyCreator(body));
+        },
+        sendMessage: () => {
+            dispatch(sendMessageCreator())
         }
     }
 }
