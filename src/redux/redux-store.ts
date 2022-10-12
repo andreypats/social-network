@@ -9,3 +9,6 @@ let reducers = combineReducers({    //создаем группу редьюсе
 });
 
 export let store:  Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType> = legacy_createStore (reducers);     //создаем store при помощи redux - createStore ()
+
+
+// window.store = store            //добавляем store в глобальный объект window
