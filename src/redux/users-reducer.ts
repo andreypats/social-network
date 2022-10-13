@@ -6,6 +6,7 @@ export type LocationType = {
 
 export type UserType = {
     id: number,
+    photoUrl: string,
     followed: boolean,
     fullName: string,
     status: string,
@@ -27,12 +28,7 @@ export type SetUsersType = ReturnType<typeof setUsersAC>
 export type usersReducerActionType = FollowType | UnfollowType | SetUsersType
 
 let initialState: UsersType = {
-    users: [
-        // {id: 1, followed: true, fullName: 'Andrey', status: 'I am champ', location: {city: 'Orsha', country: 'Belarus'}},
-        // {id: 2, followed: true, fullName: 'Maxim', status: 'I am businessman', location: {city: 'Mogilev', country: 'Belarus'}},
-        // {id: 3, followed: false, fullName: 'Stas', status: 'I am dreamer', location: {city: 'St.Petersburg', country: 'Russia'}},
-        // {id: 4, followed: false, fullName: 'Artem', status: 'I am rider', location: {city: 'Kazan', country: 'Russia'}},
-    ]
+    users: []
 }
 
 export const usersReducer = (state = initialState, action: usersReducerActionType): UsersType => {
