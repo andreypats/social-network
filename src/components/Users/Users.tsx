@@ -5,12 +5,13 @@ import axios from "axios";
 import userPhoto from '../../assets/images/img.png'
 
 export const Users = (props: any) => {
-
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                props.setUsers(response.data.items)
-            });
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    props.setUsers(response.data.items)
+                });
+        }
     }
 
     // {id: 1, photoUrl: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/arnie-body-builder-series-407806.jpg', followed: true, fullName: 'Andrey', status: 'I am champ', location: {city: 'Orsha', country: 'Belarus'}},
@@ -20,6 +21,7 @@ export const Users = (props: any) => {
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {
                 props.users.map((u: UserType) => <div key={u.id}>
                     <span>
