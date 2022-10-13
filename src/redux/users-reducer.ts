@@ -1,4 +1,3 @@
-
 export type LocationType = {
     city: string,
     country: string
@@ -7,7 +6,9 @@ export type LocationType = {
 export type UserType = {
     id: number,
     photoUrl: string,
+    photos: {small: string | undefined, large: string | undefined},
     followed: boolean,
+    name: string,
     fullName: string,
     status: string,
     location: LocationType
@@ -67,12 +68,3 @@ export const usersReducer = (state = initialState, action: usersReducerActionTyp
 export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users} as const)
-
-
-// export const updateNewPostTextActionCreator = (text: string | undefined) => ({
-//     type: UPDATE_NEW_POST_TEXT,
-//     newText: text
-// } as const)
-
-
-//34:45
