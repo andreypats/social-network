@@ -5,17 +5,16 @@ import axios from "axios";
 import userPhoto from '../../assets/images/img.png'
 
 export class Users extends React.Component< any, any >{
+    //классовая компонента
 
-    constructor(props: any) {
-        super(props);
-
+    componentDidMount() {           //в этом методе делаем все сайд эффекты
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
                 this.props.setUsers(response.data.items)
             });
     }
 
-    render() {
+    render() {                      //у классовой компоненты всегда есть метод render
         return (
             <div>
                 {
