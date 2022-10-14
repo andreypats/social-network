@@ -1,16 +1,17 @@
-import {combineReducers, EmptyObject, legacy_createStore, Store} from "redux";
-import {profileReducer, profileReducerActionType} from "./profile-reducer";
-import {dialogsReducer, DialogsReducerActionType} from "./dialogs-reducer";
-import {DialogsPageType, ProfilePageType} from "./store";
+import {combineReducers, legacy_createStore} from "redux";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 import {usersReducer} from "./users-reducer";
 
-let reducers = combineReducers({    //создаем группу редьюсеров при помощи combineReducers ()
+let rootReducer = combineReducers({    //создаем группу редьюсеров при помощи combineReducers ()
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
 });
 
-export let store:  Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType> = legacy_createStore (reducers);     //создаем store при помощи redux - createStore ()
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export let store = legacy_createStore (rootReducer);     //создаем store при помощи redux - legacy_createStore ()
 
 
 // window.store = store            //добавляем store в глобальный объект window
