@@ -13,5 +13,4 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 export let store = legacy_createStore (rootReducer);     //создаем store при помощи redux - legacy_createStore ()
 
-
 // window.store = store            //добавляем store в глобальный объект window

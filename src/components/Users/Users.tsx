@@ -4,7 +4,22 @@ import {UserType} from "../../redux/users-reducer";
 import axios from "axios";
 import userPhoto from '../../assets/images/img.png'
 
-export class Users extends React.Component< any, any >{
+type MapStatePropsType = {
+    // описываем, что возвращает MapStateToProps
+    users: Array<UserType>
+}
+
+type MapDispatchPropsType = {
+    // описываем, что возвращает MapDispatchToProps
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setUsers: (users: Array<UserType>) => void
+}
+
+type PropsType = MapDispatchPropsType & MapStatePropsType
+
+
+export class Users extends React.Component<PropsType>{
     //классовая компонента
 
     componentDidMount() {           //в этом методе делаем все сайд эффекты
@@ -45,10 +60,6 @@ export class Users extends React.Component< any, any >{
         );
     }
 }
-
-//20:30
-
-
 
 // {id: 1, photoUrl: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/arnie-body-builder-series-407806.jpg', followed: true, fullName: 'Andrey', status: 'I am champ', location: {city: 'Orsha', country: 'Belarus'}},
 // {id: 2, photoUrl: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/arnie-body-builder-series-407806.jpg', followed: true, fullName: 'Maxim', status: 'I am businessman', location: {city: 'Mogilev', country: 'Belarus'}},
