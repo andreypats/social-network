@@ -4,9 +4,14 @@ import {UserType} from "../../redux/users-reducer";
 import axios from "axios";
 import userPhoto from '../../assets/images/img.png'
 
+//47:30
+
 type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 type MapDispatchPropsType = {
@@ -14,34 +19,59 @@ type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
+    setCurrentPage: (currentPage: number) => void
 }
 
 type PropsType = MapDispatchPropsType & MapStatePropsType
 
 
-export class Users extends React.Component<PropsType>{
+export class Users extends React.Component<PropsType> {
     //классовая компонента
 
     componentDidMount() {           //в этом методе делаем все сайд эффекты
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             });
     }
 
     render() {                      //у классовой компоненты всегда есть метод render
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
         return (
             <div>
+                <div>
+                    { pages.map( p => {
+                        return (
+                            <span className={ this.props.currentPage === p ? s.selectedPage: '' }
+                                onClick={() => {
+                                    this.props.setCurrentPage(p)
+                                }}>{p}
+                            </span>
+                        )
+                    })}
+                </div>
                 {
                     this.props.users.map((u: UserType) => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto} alt={'User photo'}/>
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}
+                                 alt={'User photo'}/>
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={()=>{this.props.unfollow(u.id)}}>Unfollow</button>
-                                : <button onClick={()=>{this.props.follow(u.id)}}>Follow</button>}
+                                ? <button onClick={() => {
+                                    this.props.unfollow(u.id)
+                                }}>Unfollow</button>
+                                : <button onClick={() => {
+                                    this.props.follow(u.id)
+                                }}>Follow</button>}
                         </div>
                     </span>
                         <span>
