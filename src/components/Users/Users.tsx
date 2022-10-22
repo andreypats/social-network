@@ -4,8 +4,6 @@ import {UserType} from "../../redux/users-reducer";
 import axios from "axios";
 import userPhoto from '../../assets/images/img.png'
 
-//47:30
-
 type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
     users: Array<UserType>
@@ -19,6 +17,7 @@ type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
+    setTotalUsersCount: (totalCount: number) => void
     setCurrentPage: (currentPage: number) => void
 }
 
@@ -32,6 +31,15 @@ export class Users extends React.Component<PropsType> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            });
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
             });
     }
 
@@ -43,16 +51,20 @@ export class Users extends React.Component<PropsType> {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i);
         }
+        let curP = this.props.currentPage;
+        let curPF = ((curP - 5) < 0) ?  0  : curP - 5 ;
+        let curPL = curP + 5;
+        let slicedPages = pages.slice( curPF, curPL);
 
         return (
             <div>
                 <div>
-                    { pages.map( p => {
+                    { slicedPages.map( p => {
                         return (
                             <span className={ this.props.currentPage === p ? s.selectedPage: '' }
-                                onClick={() => {
-                                    this.props.setCurrentPage(p)
-                                }}>{p}
+                                onClick={
+                                    (event) => {this.onPageChanged(p)}
+                                }>{p}
                             </span>
                         )
                     })}
