@@ -1,5 +1,6 @@
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
+import {ProfilePropsType} from "../components/Profile/ProfileContainer";
 
 type MessageType = {
     id: number
@@ -17,7 +18,7 @@ export type PostType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string | undefined
-    profile: any
+    profile: ProfilePropsType | null
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>

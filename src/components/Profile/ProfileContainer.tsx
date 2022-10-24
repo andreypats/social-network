@@ -9,6 +9,31 @@ import {
     useParams,
 } from "react-router-dom";
 
+export type ContactsPropsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type ProfilePropsType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsPropsType
+}
+
+type MapStatePropsType = {
+    // описываем, что возвращает MapStateToProps
+    profile: ProfilePropsType,
+
+}
+
 class ProfileContainer extends React.Component<any, any>{
 
     componentDidMount() {
@@ -29,7 +54,7 @@ class ProfileContainer extends React.Component<any, any>{
     }
 }
 
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: any): MapStatePropsType => ({
     profile: state.profilePage.profile,
 })
 
