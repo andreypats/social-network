@@ -15,7 +15,7 @@ export const ProfileInfo = (props: any) => {
                      src={"https://avatars.mds.yandex.net/i?id=0b539fa0b4966504fd262589ba91f5f6-4571049-images-thumbs&n=13"}/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large} alt={'profile photo'}/>
+                <img src={props.profile.photos.large} alt={'No User photo -'}/>
                 ava + description
             </div>
         </div>
