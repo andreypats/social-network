@@ -17,6 +17,7 @@ export type PostType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string | undefined
+    profile: any
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>
@@ -45,7 +46,8 @@ export let store: StoreType = {
                 {id: 3, message: 'Hello', likesCount: 5},
                 {id: 4, message: 'My name is...', likesCount: 2},
             ],
-            newPostText: 'new text'
+            newPostText: 'new text',
+            profile: null
         },
         dialogsPage: {
             dialogs: [{id: 1, name: 'Andrey'},

@@ -7,10 +7,10 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 //     store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
 // }
 
-export const Profile = () => {
+export const Profile = (props: any) => {
     return (
         <div className={s.profile}>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>
     )
