@@ -3,11 +3,8 @@ import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../redux/profile-reducer";
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {StateType} from "../../redux/store";
 
 export type ContactsPropsType = {
     github: string
@@ -26,18 +23,34 @@ export type ProfilePropsType = {
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsPropsType
+    photos: {large: string}
 }
 
-type MapStatePropsType = {
+export type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
-    profile: ProfilePropsType,
+    profile: ProfilePropsType | null,
 
 }
 
-class ProfileContainer extends React.Component<any, any>{
+export type mapDispatchPropsType = {
+    // описываем, что возвращает MapDispatchToProps
+    setUserProfile: (profile: ProfilePropsType) => void
+}
+
+type PathParamsType = {
+    profileId: string
+}
+
+type ParamsPropsType = {
+    param: PathParamsType
+}
+
+type ProfileContainerPropsType = mapDispatchPropsType & MapStatePropsType & ParamsPropsType
+
+class ProfileContainer extends React.Component<ProfileContainerPropsType>{
 
     componentDidMount() {
-        let profileId = this.props.router.params.profileId;
+        let profileId = this.props.param.profileId;
         // if(!profileId) {
         //     profileId = 26384;
         // }
@@ -54,28 +67,34 @@ class ProfileContainer extends React.Component<any, any>{
     }
 }
 
-let mapStateToProps = (state: any): MapStatePropsType => ({
+let mapStateToProps = (state: StateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
 })
 
-function withRouter(Component: any) {
-    function ComponentWithRouterProp(props: any) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{ location, navigate, params }}
-            />
-        );
-    }
-
-    return ComponentWithRouterProp;
+const TakeParams = (props: any) => {
+    return <ProfileContainer {...props} param={useParams()} />
 }
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {setUserProfile})(TakeParams);
+
+// function withRouter(Component: any) {
+//     function ComponentWithRouterProp(props: any) {
+//         let location = useLocation();
+//         let navigate = useNavigate();
+//         let params = useParams();
+//         return (
+//             <Component
+//                 {...props}
+//                 router={{ location, navigate, params }}
+//             />
+//         );
+//     }
+//
+//     return ComponentWithRouterProp;
+// }
+//
+// export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
 
 //let WithUrlDataContainerComponent = withRouter(ProfileContainer);
-
+//
 //export default connect (mapStateToProps, {setUserProfile}) (WithUrlDataContainerComponent)

@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../common/Preloader/Preloader";
+import {MapStatePropsType} from "../ProfileContainer";
 
-export const ProfileInfo = (props: any) => {
+export const ProfileInfo = (props: MapStatePropsType) => {
     if (!props.profile) {
         return <Preloader />
     }

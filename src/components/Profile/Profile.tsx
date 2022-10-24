@@ -2,12 +2,9 @@ import React from "react";
 import s from './Profile.module.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {MapStatePropsType} from "./ProfileContainer";
 
-// type ProfileType = {
-//     store: Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType}, profileReducerActionType | DialogsReducerActionType>
-// }
-
-export const Profile = (props: any) => {
+export const Profile = (props: MapStatePropsType) => {
     return (
         <div className={s.profile}>
             <ProfileInfo profile={props.profile}/>

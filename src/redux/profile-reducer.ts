@@ -1,4 +1,5 @@
 import {ProfilePageType} from "./store";
+import {ProfilePropsType} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -55,4 +56,4 @@ export const updateNewPostTextActionCreator = (text: string | undefined) => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 } as const)
-export const setUserProfile = (profile: string) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfile = (profile: ProfilePropsType) => ({type: SET_USER_PROFILE, profile} as const)
