@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import {Header} from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
@@ -14,13 +14,13 @@ const App = () => {
     // компонента - функция, возвращающая разметку JSX (HTML внутри JS)
     return (
         <div className={'app-wrapper'}>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path={"/dialogs/*"} element={<DialogsContainer/>}/>
                     <Route path={"/profile/:profileId"} element={<ProfileContainer/>}/>
-                    {/*<Route path={"/profile/*"} element={<ProfileContainer/>}/>*/}
+                    <Route path={"/profile/*"} element={<ProfileContainer/>}/>
                     <Route path={"/users/*"} element={<UsersContainer/>}/>
                     <Route path={"/news/*"} element={<News/>}/>
                     <Route path={"/music/*"} element={<Music/>}/>
