@@ -5,14 +5,14 @@ import {
     setCurrentPage,
     setIsFetching,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingProgress,
     unfollow,
     UserType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {getUsers, usersAPI} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 export type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
@@ -21,6 +21,7 @@ export type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: []
 }
 
 export type mapDispatchPropsType = {
@@ -31,6 +32,7 @@ export type mapDispatchPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     setIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (followingInProgress: boolean, userId: number) => void
 }
 
 type UsersAPIComponentPropsType = mapDispatchPropsType & MapStatePropsType
@@ -69,6 +71,8 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -81,6 +85,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -113,5 +118,6 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    setIsFetching
+    setIsFetching,
+    toggleFollowingProgress
 })(UsersContainer);
