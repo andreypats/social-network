@@ -2,8 +2,7 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
-import {useParams} from "react-router-dom";
-import {StateType} from "../../redux/store";
+import {Navigate, useParams} from "react-router-dom";
 
 export type ContactsPropsType = {
     github: string
@@ -28,7 +27,7 @@ export type ProfilePropsType = {
 export type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
     profile: ProfilePropsType | null,
-
+    isAuth: boolean
 }
 
 export type mapDispatchPropsType = {
@@ -44,7 +43,7 @@ type ParamsPropsType = {
     param: PathParamsType
 }
 
-type ProfileContainerPropsType = mapDispatchPropsType & MapStatePropsType & ParamsPropsType
+type ProfileContainerPropsType = mapDispatchPropsType & MapStatePropsType & ParamsPropsType & {isAuth: boolean}
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType>{
 
@@ -57,14 +56,18 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
     }
 
     render() {
+
+        if (!this.props.isAuth) return <Navigate to={'/login'} />
+
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         )
     }
 }
 
-let mapStateToProps = (state: StateType): MapStatePropsType => ({
+let mapStateToProps = (state: any): MapStatePropsType => ({
     profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 const TakeParams = (props: any) => {

@@ -9,6 +9,7 @@ import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import Login from "./components/Login/Login";
 
 const App = () => {
     // компонента - функция, возвращающая разметку JSX (HTML внутри JS)
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path={"/profile/:profileId"} element={<ProfileContainer/>}/>
                     <Route path={"/profile/*"} element={<ProfileContainer/>}/>
                     <Route path={"/users/*"} element={<UsersContainer/>}/>
+                    <Route path={"/login/*"} element={<Login/>}/>
                     <Route path={"/news/*"} element={<News/>}/>
                     <Route path={"/music/*"} element={<Music/>}/>
                     <Route path={"/settings/*"} element={<Settings/>}/>

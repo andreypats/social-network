@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialog.module.css'
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 
 type DialogsNameType = {
     id: number
@@ -32,6 +32,7 @@ type DialogsType = {
     updateNewMessageBody: any
     sendMessage: any
     dialogsPage: any
+    isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsType) => {
@@ -54,6 +55,8 @@ export const Dialogs = (props: DialogsType) => {
         props.updateNewMessageBody(body)
         //props.store.dispatch(updateNewMessageBodyCreator(body));
     }
+
+    if (!props.isAuth) return <Navigate to={'/login'} />
 
     return (
         <div>

@@ -28,6 +28,7 @@ export type DialogsPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    isAuth?: boolean
 }
 export type StoreType = {
     _state: StateType
