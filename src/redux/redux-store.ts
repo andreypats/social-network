@@ -1,8 +1,9 @@
-import {combineReducers, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
+import thunk  from "redux-thunk";
 
 let rootReducer = combineReducers({    //создаем группу редьюсеров при помощи combineReducers ()
     profilePage: profileReducer,
@@ -13,6 +14,6 @@ let rootReducer = combineReducers({    //создаем группу редью�
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export let store = legacy_createStore (rootReducer);     //создаем store при помощи redux - legacy_createStore ()
+export let store = legacy_createStore (rootReducer, applyMiddleware(thunk));     //создаем store при помощи redux - legacy_createStore (), подключаем санки (applyMiddleware(thunk))
 
 // window.store = store            //добавляем store в глобальный объект window
