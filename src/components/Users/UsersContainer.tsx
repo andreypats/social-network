@@ -12,6 +12,7 @@ import {
 import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
@@ -77,30 +78,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-/*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        setIsFetching: (isFetching: boolean) => {
-            dispatch(setIsFetchingAC(isFetching))
-        },
-    }
-}*/
-
-export default connect(mapStateToProps, {
+export default withAuthRedirect (connect(mapStateToProps, {
     follow,
     unfollow,
     setUsers,
@@ -109,4 +87,4 @@ export default connect(mapStateToProps, {
     setIsFetching,
     toggleFollowingProgress,
     getUsers
-})(UsersContainer);
+})(UsersContainer));

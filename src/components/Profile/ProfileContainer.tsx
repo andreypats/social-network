@@ -2,7 +2,8 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
-import {Navigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type ContactsPropsType = {
     github: string
@@ -50,14 +51,12 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
     componentDidMount() {
         let profileId = this.props.param.profileId;
         if(!profileId) {
-            profileId = 26384;
+            profileId = 26623;
         }
         this.props.getUserProfile(profileId)
     }
 
     render() {
-
-        if (!this.props.isAuth) return <Navigate to={'/login'} />
 
         return (
             <Profile {...this.props} profile={this.props.profile}/>
@@ -65,13 +64,14 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
     }
 }
 
-let mapStateToProps = (state: any): MapStatePropsType => ({
+let AuthRedirectComponent = withAuthRedirect (ProfileContainer);
+
+let mapStateToProps = (state: any): any => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
 })
 
 const TakeParams = (props: any) => {
-    return <ProfileContainer {...props} param={useParams()} />
+    return <AuthRedirectComponent {...props} param={useParams()} />
 }
 
 export default connect(mapStateToProps, {getUserProfile})(TakeParams);
