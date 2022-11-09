@@ -13,6 +13,8 @@ import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+import {Dialogs} from "../Dialogs/Dialogs";
 
 export type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps
@@ -78,13 +80,16 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default withAuthRedirect (connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    setIsFetching,
-    toggleFollowingProgress,
-    getUsers
-})(UsersContainer));
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        setIsFetching,
+        toggleFollowingProgress,
+        getUsers
+    }),
+    withAuthRedirect
+)(UsersContainer);
