@@ -19,6 +19,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string | undefined
     profile: ProfilePropsType | null
+    status: string
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>
@@ -49,7 +50,8 @@ export let store: StoreType = {
                 {id: 4, message: 'My name is...', likesCount: 2},
             ],
             newPostText: 'new text',
-            profile: null
+            profile: null,
+            status: ''
         },
         dialogsPage: {
             dialogs: [{id: 1, name: 'Andrey'},
@@ -62,7 +64,7 @@ export let store: StoreType = {
                 {id: 3, message: 'How are you'},
                 {id: 4, message: 'What is your name?'},
             ],
-            newMessageBody: ''
+            newMessageBody: '',
         }
     },
     // метод

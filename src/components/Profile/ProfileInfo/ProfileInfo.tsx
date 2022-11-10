@@ -18,7 +18,7 @@ export const ProfileInfo = (props: MapStatePropsType) => {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt={'No User photo -'}/>
-                <ProfileStatus status={'lkflvlfmv'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
