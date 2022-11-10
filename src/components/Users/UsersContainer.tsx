@@ -14,7 +14,6 @@ import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {Dialogs} from "../Dialogs/Dialogs";
 
 export type MapStatePropsType = {
     // описываем, что возвращает MapStateToProps

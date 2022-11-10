@@ -4,8 +4,6 @@ import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
-import {Dialogs} from "../Dialogs/Dialogs";
 
 export type ContactsPropsType = {
     github: string
